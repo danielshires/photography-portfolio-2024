@@ -1,0 +1,23 @@
+---
+const pageTitle = 'Balls';
+import ThemeIcon from './ThemeIcon.astro';
+---
+
+<nav class='w-100 flex justify-between'>
+	<a class='hover:text-slate-400' href='/'><h1>Dan's Astro Blog</h1></a>
+
+	<div class="flex flex-nowrap gap-2">
+		<ul class='nav-links w-100 justify-between hidden sm:flex'>
+			<li class='px-2'>
+				<a class='hover:text-slate-400' href='/about/'>About</a>
+			</li>
+			<li class='px-2'>
+				<a class='hover:text-slate-400' href='/blog/'>Blog</a>
+			</li>
+			<li class='px-2'>
+				<a class='hover:text-slate-400' href='/tags/'>Tags</a>
+			</li>
+		</ul>
+		<ThemeIcon />
+	</div>
+</nav>

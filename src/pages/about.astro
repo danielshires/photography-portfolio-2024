@@ -1,24 +1,36 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const pageTitle = 'About';
+const identity = {
+	firstName: 'Daniel',
+	lastName: 'Hogan',
+	age: 30,
+	location: 'Michigan',
+	occupation: 'Web Developer',
+	interests: ['Web Development', 'Reading', 'Video Games', 'Board Games'],
+	bio: 'I am a web developer from Michigan. I enjoy reading, video games, and board games.',
+};
+
+const response = await fetch(
+	'https://api.are.na/v2/channels/portfolio-inspo-m03qvxygskk',
+);
+interface Block {
+  image: {
+    large: {
+      url: string;
+    };
+  };
+}
+
+const data = await response.json();
+const imgUrls = data.contents.map((block: Block) => {
+	return block.image ? block.image.large.url : null
+});
+const imgUrl = imgUrls.filter(Boolean)
+
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} >
-    <title>Astro</title>
-  </head>
-  <body>
-    <a href='/'>Home</a>
-    <a href='/about'>About</a>
-    <a href='/blog'>Blog</a>
-    <h1>My Astro Site</h1>
-    <h1>About Me</h1>
-    <h2>... and my new Astro site!</h2>
-
-    <p>I am working through Astro's introductory tutorial. This is the second page on my website, and it's the first one I built myself!</p>
-
-    <p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
-  </body>
-</html>
+<BaseLayout pageTitle={pageTitle}>
+	<p>{data.title}</p>
+	<img src={imgUrl}>
+</BaseLayout>
